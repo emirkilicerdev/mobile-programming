@@ -30,14 +30,14 @@ void main(List<String> args) {
             if (num2 != 0) {
               print('Total: ${num1 / num2}');
             } else {
-              print("Divide by zero error.");
+              throw ArgumentError("Divide by zero.");
             }
             break;
             default:
             print("Invalid operator.");
         }
       } catch (e) {
-        print("Invalid input.");  
+        print("$e");  
       }
 
     } else {
