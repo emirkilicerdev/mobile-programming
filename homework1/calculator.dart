@@ -34,7 +34,7 @@ void main(List<String> args) {
             }
             break;
             default:
-            print("Invalid operator.");
+            throw ArgumentError("Invalid operator.");
         }
       } catch (e) {
         print("$e");  
