@@ -38,7 +38,7 @@ void main(List<String> args){
   try {
     numbercalc(input);
   } catch (e) {
-    print("Error: $e");
+    print("$e");
   }
 
 }
