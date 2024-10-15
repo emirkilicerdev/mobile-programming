@@ -6,7 +6,6 @@ void main() {
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
-
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -14,10 +13,13 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Color _backgroundColor = Color.fromRGBO(255, 239, 0, 1);
   Color _iconColor = Color.fromRGBO(0, 39, 73, 1);
+  bool _isBackgroundColorChanged = false;
+  bool _isIconColorChanged = false;
 
   void _changeBackgroundColor() {
     setState(() {
-      _backgroundColor = _backgroundColor == Color.fromRGBO(255, 239, 0, 1)
+      _isBackgroundColorChanged = !_isBackgroundColorChanged;
+      _backgroundColor = _isBackgroundColorChanged
           ? Color.fromRGBO(0, 39, 73, 1)
           : Color.fromRGBO(255, 239, 0, 1);
     });
@@ -25,31 +27,34 @@ class _MyAppState extends State<MyApp> {
 
   void _changeIconColor() {
     setState(() {
-      _iconColor = _iconColor == Color.fromRGBO(0, 39, 73, 1)
+      _isIconColorChanged = !_isIconColorChanged;
+      _iconColor = _isIconColorChanged
           ? Color.fromRGBO(255, 239, 0, 1)
           : Color.fromRGBO(0, 39, 73, 1);
     });
   }
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Container(
+        body: AnimatedContainer(
+          duration: Duration(milliseconds: 500),
           color: _backgroundColor,
           child: Center(
             child: IconButton(
-            onPressed: () 
-            {_changeIconColor();
-            _changeBackgroundColor();},
-            icon: Icon(
-              Icons.arrow_forward_ios_rounded,
-              color: _iconColor,
-              size: 40,
+              onPressed: () {
+                _changeIconColor();
+                _changeBackgroundColor();
+              },
+              icon: Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: _iconColor,
+                size: 40,
+              ),
             ),
           ),
         ),
-        )
       ),
     );
   }
