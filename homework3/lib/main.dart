@@ -43,7 +43,24 @@ class MyApp extends StatelessWidget {
             const SizedBox(height: 10),
             buildSearchBar(),
             const SizedBox(height: 10),
-            buildContent(),
+            buildText(),
+            const SizedBox(height: 10),
+            Expanded(
+          child: ListView(
+            padding: const EdgeInsets.symmetric(vertical: 10), // İsteğe bağlı: padding ekleyebilirsiniz
+            children: [
+              buildContent("Firma Adı"),
+              const SizedBox(height: 10),
+              buildContent("Firma Adı Uzun Firma Adı Uzun Firma Adı Uzun Firma Adı"),
+              const SizedBox(height: 10),
+              buildContent("Firma Adı"),
+              const SizedBox(height: 10),
+              buildContent("Firma Adı Uzun Firma Adı Uzun Firma Adı Uzun Firma Adı"),
+              const SizedBox(height: 10),
+              buildContent("Firma Adı"),
+            ],
+          ),
+        ),
           ],
         ),
       ),
@@ -94,6 +111,7 @@ class MyApp extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Container(
+        width: double.infinity,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10.0),
@@ -121,7 +139,7 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  Widget buildContent() {
+  Widget buildText() {
     return const Column(
       children: [
         Padding(
@@ -135,6 +153,74 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget buildContent(String name) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.only(left: 10),
+      margin: const EdgeInsets.all(10.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.4),
+            blurRadius: 2.0,
+            offset: const Offset(0, 4),
+          )
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [ 
+          const Icon(
+            Icons.label_important,
+            size: 30,
+          ),
+          Expanded(
+            child: Text(
+            name,
+            softWrap: true, 
+            style: const TextStyle(
+              color: Colors.black, 
+              fontSize: 18,
+            ),
+          ),
+        ),
+          Container(
+            decoration: const BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(10),
+                bottomRight: Radius.circular(10)
+              ),
+              gradient: LinearGradient(
+                colors: [
+                  Color.fromRGBO(9, 8, 66, 1),
+                  Color.fromRGBO(94, 92, 219, 1),
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
+            width: 80,
+            height: 80,
+            child: const Center(
+              child: Text(
+                "%10",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
